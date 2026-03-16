@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>榊原 涼平 · 사카키바라 료헤이</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Serif+KR:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--off);font-family:'Noto Serif KR',serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;outline:none}
+img{display:block}
+
+/* ── VARIABLES ────────────────────────────────── */
+:root{
+  --bg:    #07080c;
+  --bg2:   #0c0d13;
+  --bg3:   #12131b;
+  --gold:  #b8975a;
+  --gold2: #d4b87a;
+  --gold-dim:  rgba(184,151,90,0.14);
+  --gold-line: rgba(184,151,90,0.13);
+  --crimson:     #7c1c28;
+  --crimson-dim: rgba(124,28,40,0.2);
+  --white: #f0ece3;
+  --off:   #c5c1b9;
+  --dim:   #68645e;
+  --line:  rgba(240,236,227,0.055);
+}
+
+/* ══ INTRO ════════════════════════════════════════ */
+#intro-screen{
+  position:fixed;inset:0;z-index:1000;
+  background:radial-gradient(ellipse 80% 60% at 50% 60%, #0d0e18 0%, #04050a 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;cursor:pointer;
+  transition:opacity 1.4s ease;
+}
+#intro-screen.out{opacity:0;pointer-events:none}
+
+/* Cherry blossom petals */
+.petals{position:absolute;inset:0;pointer-events:none}
+.petal{
+  position:absolute;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation:petalFall linear infinite;
+  opacity:0;
+}
+@keyframes petalFall{
+  0%  {transform:translateY(-60px) rotate(0deg) translateX(0px);opacity:0}
+  8%  {opacity:.75}
+  88% {opacity:.45}
+  100%{transform:translateY(108vh) rotate(560deg) translateX(50px);opacity:0}
+}
+
+/* ── GATE ── */
+.gate-outer{
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:2;
+  filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8));
+}
+
+/* Roof */
+.gate-roof-wrap{
+  position:relative;
+  width:460px;height:0;
+  z-index:3;
+}
+.gate-roof-svg{
+  position:absolute;bottom:0;left:0;
+  width:100%;
+}
+
+/* Gate body */
+.gate-body{
+  display:flex;align-items:stretch;
+  position:relative;z-index:2;
+  margin-top:-2px;
+}
+.gate-pillar{
+  width:32px;height:272px;
+  background:linear-gradient(90deg,#16130c,#22201a,#181510,#22201a,#16130c);
+  flex-shrink:0;position:relative;
+  border-top:2px solid rgba(184,151,90,0.2);
+}
+.gate-pillar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:14px;
+  background:#2a2820;border-bottom:1px solid rgba(184,151,90,0.15);
+}
+/* Stone base */
+.gate-pillar::after{
+  content:'';position:absolute;bottom:0;left:-4px;right:-4px;height:20px;
+  background:linear-gradient(to bottom,#1a1814,#0e0d0a);
+  border-top:1px solid rgba(184,151,90,0.1);
+}
+
+/* 3D door container */
+.gate-doors-3d{
+  width:340px;height:272px;
+  perspective:700px;
+  display:flex;
+  position:relative;
+  overflow:visible;
+}
+.gate-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(210,175,110,0.2) 0%,transparent 65%);
+  z-index:0;
+}
+.gate-door{
+  width:170px;height:272px;
+  background:
+    repeating-linear-gradient(180deg,
+      transparent 0px, transparent 22px,
+      rgba(255,255,255,0.013) 22px, rgba(255,255,255,0.013) 23px
+    ),
+    linear-gradient(180deg,#1e1a0c 0%,#2c2510 45%,#1e1a0c 100%);
+  position:relative;flex-shrink:0;z-index:1;
+  backface-visibility:hidden;
+}
+.gate-door-left{
+  transform-origin:left center;
+  border-right:1px solid rgba(0,0,0,0.9);
+}
+.gate-door-right{
+  transform-origin:right center;
+  border-left:1px solid rgba(0,0,0,0.9);
+}
+/* Vertical bar detail */
+.door-bar-l,.door-bar-r{
+  position:absolute;top:20px;bottom:20px;width:2px;
+  background:linear-gradient(180deg,transparent,rgba(184,151,90,0.25),rgba(184,151,90,0.12),rgba(184,151,90,0.25),transparent);
+}
+.door-bar-l{right:26px}
+.door-bar-r{left:26px}
+/* Metal ring fitting */
+.door-ring{
+  position:absolute;bottom:96px;width:14px;height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#e0c060,#9a7520 60%,#6a5010);
+  box-shadow:0 0 8px rgba(212,168,58,0.35),inset 0 1px 1px rgba(255,240,180,0.3);
+}
+.gate-door-left .door-ring{right:16px}
+.gate-door-right .door-ring{left:16px}
+/* Horizontal cross bar */
+.door-hbar{
+  position:absolute;left:12px;right:12px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(184,151,90,0.2),transparent);
+}
+.door-hbar-top{top:56px}
+.door-hbar-bot{bottom:56px}
+
+/* Door animation */
+@keyframes doorSwingLeft{
+  0%  {transform:rotateY(0deg)}
+  100%{transform:rotateY(-82deg)}
+}
+@keyframes doorSwingRight{
+  0%  {transform:rotateY(0deg)}
+  100%{transform:rotateY(82deg)}
+}
+.gate-door-left.open {animation:doorSwingLeft  2.8s cubic-bezier(0.3,0,0.15,1) forwards}
+.gate-door-right.open{animation:doorSwingRight 2.8s cubic-bezier(0.3,0,0.15,1) forwards}
+
+/* Step */
+.gate-step{
+  width:376px;height:14px;
+  background:linear-gradient(to bottom,#1c1a14,#0f0e0b);
+  border-top:1px solid rgba(184,151,90,0.1);
+}
+
+/* Intro text */
+.intro-title-block{margin-top:36px;text-align:center;z-index:2;position:relative}
+.intro-title-jp{
+  font-family:'Shippori Mincho',serif;font-size:20px;font-weight:700;
+  letter-spacing:.7em;color:var(--gold);margin-bottom:10px;
+  text-shadow:0 0 20px rgba(184,151,90,0.3);
+}
+.intro-title-kr{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.55em;color:var(--dim);text-transform:uppercase;
+}
+.intro-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.35em;
+  color:rgba(240,236,227,0.18);z-index:2;white-space:nowrap;
+  animation:hintPulse 2.4s ease-in-out infinite;
+}
+@keyframes hintPulse{0%,100%{opacity:.4}50%{opacity:.9}}
+
+/* Ground mist */
+.intro-mist{
+  position:absolute;bottom:0;left:0;right:0;height:220px;
+  background:linear-gradient(to top,rgba(4,5,10,0.9) 0%,transparent 100%);
+  pointer-events:none;
+}
+/* Top mist */
+.intro-top-mist{
+  position:absolute;top:0;left:0;right:0;height:160px;
+  background:linear-gradient(to bottom,rgba(4,5,10,0.7) 0%,transparent 100%);
+  pointer-events:none;
+}
+
+/* ══ MAIN SITE ════════════════════════════════════ */
+#main-site{opacity:0;transition:opacity 1.3s ease .2s}
+#main-site.visible{opacity:1}
+
+/* Subtle washi-paper texture overlay */
+#main-site::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    repeating-linear-gradient(0deg,  transparent, transparent 3px, rgba(184,151,90,.006) 3px, rgba(184,151,90,.006) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(184,151,90,.004) 3px, rgba(184,151,90,.004) 4px);
+}
+
+/* ══ MASTHEAD ════════════════════════════════════ */
+.masthead{
+  background:var(--bg);border-bottom:1px solid var(--gold-line);
+  position:relative;overflow:hidden;
+}
+/* Diagonal textile texture */
+.masthead::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(
+    -45deg, transparent, transparent 28px,
+    rgba(184,151,90,.005) 28px, rgba(184,151,90,.005) 29px
+  );
+}
+.masthead-top{
+  display:flex;align-items:flex-start;gap:0;
+  position:relative;z-index:1;
+  padding:76px 84px 68px;
+  min-height:340px;
+}
+.masthead-accent{
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
+  opacity:.35;flex-shrink:0;margin-right:40px;align-self:stretch;
+}
+.masthead-title-block{flex:1}
+.masthead-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:22px;
+  display:flex;align-items:center;gap:14px;
+}
+.masthead-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--gold)}
+.masthead-name-jp{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(54px,7vw,92px);font-weight:800;
+  color:var(--white);letter-spacing:.14em;line-height:1;
+  margin-bottom:12px;font-feature-settings:"palt"1;
+}
+.masthead-name-kr{
+  font-family:'Noto Serif KR',serif;font-size:13px;
+  letter-spacing:.5em;color:rgba(240,236,227,.3);margin-bottom:36px;
+}
+.masthead-quote{
+  padding-top:26px;border-top:1px solid var(--line);max-width:600px;
+}
+.masthead-quote-jp{
+  font-family:'Shippori Mincho',serif;font-size:15px;font-weight:500;
+  line-height:2.1;color:var(--off);margin-bottom:8px;
+  font-feature-settings:"palt"1;
+}
+.masthead-quote-kr{
+  font-family:'Noto Serif KR',serif;font-size:12.5px;font-style:italic;
+  line-height:1.9;color:var(--dim);
+}
+.masthead-quote-attr{
+  margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.32em;color:var(--gold);opacity:.65;text-transform:uppercase;
+}
+
+.masthead-play { margin-top: 32px; display: inline-flex; }
+
+/* ══ TAB NAV ════════════════════════════════════ */
+.tab-nav{
+  display:flex;border-bottom:1px solid var(--gold-line);
+  padding:0 84px;background:var(--bg2);
+  position:sticky;top:0;z-index:100;
+}
+.tab-nav-btn{
+  background:none;border:none;padding:18px 0;margin-right:44px;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:.36em;color:var(--dim);text-transform:uppercase;
+  position:relative;transition:color .2s;
+}
+.tab-nav-btn::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;
+  background:var(--gold);opacity:0;transition:opacity .2s;
+}
+.tab-nav-btn.active{color:var(--gold)}
+.tab-nav-btn.active::after{opacity:1}
+.tab-nav-btn:hover{color:var(--off)}
+
+/* ══ TAB PANELS ════════════════════════════════ */
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:tabIn .3s ease}
+@keyframes tabIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* ══ 세계관 TAB ════════════════════════════════ */
+.world-inner{max-width:1200px;margin:0 auto;padding:76px 84px 110px}
+
+/* intro two-col */
+.world-intro-wrap{
+  display:grid;grid-template-columns:1fr 280px;
+  gap:48px;align-items:start;
+  margin-bottom:80px;
+}
+.world-intro{
+  padding:0 0 0 30px;
+  border-left:2px solid rgba(184,151,90,.22);
+}
+.world-intro p{
+  font-family:'Noto Serif KR',serif;font-size:15px;font-weight:400;
+  line-height:2.65;color:var(--off);margin-bottom:28px;
+  word-break:keep-all;overflow-wrap:break-word;
+}
+.world-intro p:last-child{margin-bottom:0}
+.world-intro strong{color:var(--white)}
+
+/* 사카키바라 가 강조 */
+.intro-name-hl{
+  font-family:'Shippori Mincho',serif;
+  font-size:17px;font-weight:700;
+  color:var(--gold);letter-spacing:.12em;
+  text-shadow:0 0 18px rgba(184,151,90,.35);
+  font-feature-settings:"palt"1;
+}
+
+/* intro 사진 칸 */
+.world-intro-photo{
+  position:sticky;top:72px;
+  width:100%;aspect-ratio:2/3;
+  background:var(--bg3);border:1px solid var(--gold-line);
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.world-intro-photo img{
+  width:100%;height:100%;object-fit:cover;
+  object-position:center;
+  filter:sepia(.2) contrast(1.03);
+  transition:transform .7s ease;
+}
+.world-intro-photo:hover img{transform:scale(1.04)}
+.world-intro-photo-ph{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:.22em;color:var(--dim);text-align:center;line-height:2.2;
+  padding:16px;
+}
+
+.world-sec-label{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:30px;
+  display:flex;align-items:center;gap:14px;
+}
+.world-sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--gold-line),transparent)}
+
+.world-card-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--gold-line);border:1px solid var(--gold-line);
+  margin-bottom:80px;
+}
+.world-card{background:var(--bg2);padding:34px 38px}
+.world-card.full{grid-column:1/-1}
+.wc-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.wc-tag::before{content:'';display:block;width:10px;height:1px;background:var(--gold)}
+.wc-title{
+  font-family:'Shippori Mincho',serif;font-size:19px;font-weight:700;
+  color:var(--white);margin-bottom:14px;letter-spacing:.08em;
+  font-feature-settings:"palt"1;
+}
+.wc-text{
+  font-family:'Noto Serif KR',serif;font-size:13.5px;font-weight:400;
+  line-height:2.3;color:var(--off);
+}
+
+/* NPC */
+.npc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--gold-line);border:1px solid var(--gold-line);
+}
+.npc-card{
+  background:var(--bg2);padding:28px;
+  transition:background .2s;
+}
+.npc-card:hover{background:var(--bg3)}
+.npc-photo{
+  width:100%;aspect-ratio:2/3;background:var(--bg3);
+  border:1px solid var(--line);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.npc-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(.12) contrast(1.05)}
+.npc-photo-ph{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.2em;color:var(--dim);text-align:center;line-height:2;
+}
+.npc-role{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:7px}
+.npc-name-jp{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px;font-feature-settings:"palt"1}
+.npc-name-kr{font-family:'Noto Serif KR',serif;font-size:11px;color:var(--dim);letter-spacing:.15em;margin-bottom:13px}
+.npc-desc{font-family:'Noto Serif KR',serif;font-size:12.5px;line-height:2.1;color:var(--off)}
+
+/* ══ 캐릭터 TAB ════════════════════════════════ */
+.char-layout{
+  display:grid;grid-template-columns:1fr 290px;
+  gap:60px;align-items:start;
+  padding:68px 84px 110px;max-width:1300px;margin:0 auto;
+}
+.char-info-col{min-width:0}
+
+/* Photo col */
+.char-photo-col{}
+.char-main-photo{
+  width:100%;aspect-ratio:3/4;overflow:hidden;
+  background:var(--bg2);border:1px solid var(--gold-line);margin-bottom:8px;
+}
+.char-main-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  filter:sepia(.12) contrast(1.05);transition:transform .7s ease;
+}
+.char-main-photo:hover img{transform:scale(1.04)}
+.char-main-photo-ph{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+}
+.char-main-photo-ph span{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:.2em;color:var(--dim);text-align:center;line-height:2;
+}
+.char-sub-photos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.char-sub-photo{
+  aspect-ratio:1/1;overflow:hidden;
+  background:var(--bg3);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+}
+.char-sub-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(.12) contrast(1.05);transition:transform .6s}
+.char-sub-photo:hover img{transform:scale(1.06)}
+.char-sub-ph{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.15em;color:var(--dim);text-align:center;line-height:1.9;padding:8px;
+}
+.char-photo-cap{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.3em;color:var(--dim);text-align:center;text-transform:uppercase;
+}
+
+/* Char info */
+.char-name-block{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.char-file-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.42em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.char-file-tag::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
+.char-name-jp{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(36px,4vw,54px);font-weight:800;
+  color:var(--white);letter-spacing:.13em;line-height:1;margin-bottom:8px;
+  font-feature-settings:"palt"1;
+}
+.char-name-kr{font-family:'Noto Serif KR',serif;font-size:13px;letter-spacing:.42em;color:var(--dim)}
+
+.char-stat-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--gold-line);border:1px solid var(--gold-line);
+  margin-bottom:40px;
+}
+.char-stat-cell{background:var(--bg2);padding:20px 24px;transition:background .15s}
+.char-stat-cell:hover{background:var(--bg3)}
+.char-stat-cell.full{grid-column:1/-1}
+.csk{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.36em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:10px;
+}
+.csv{font-family:'Noto Serif KR',serif;font-size:13px;font-weight:500;color:var(--off);line-height:1.9}
+.csv strong{color:var(--white);font-weight:700}
+.chip-row{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.15em;
+  padding:3px 12px;border:1px solid var(--gold-line);color:var(--gold);background:var(--gold-dim);
+}
+
+.char-fear{
+  background:var(--bg2);border:1px solid var(--line);
+  border-left:3px solid var(--crimson);padding:24px 28px;margin-bottom:14px;
+}
+.char-fear-label{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  color:var(--crimson);text-transform:uppercase;margin-bottom:11px;
+}
+.char-secret{
+  background:var(--bg2);border:1px solid var(--line);
+  border-left:3px solid rgba(184,151,90,.4);padding:24px 28px;margin-bottom:42px;
+}
+.char-secret-label{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:11px;
+}
+.char-fear p,.char-secret p{
+  font-family:'Noto Serif KR',serif;font-size:13px;font-weight:500;line-height:2.1;color:var(--off);
+}
+.char-fear p strong,.char-secret p strong{color:var(--white)}
+
+.play-link{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--gold);color:var(--bg);
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  text-decoration:none;padding:15px 34px;
+  transition:background .2s,transform .2s;
+}
+.play-link:hover{background:var(--white);transform:translateX(4px)}
+
+/* ══ 기타 TAB ════════════════════════════════════ */
+.etc-inner{max-width:900px;margin:0 auto;padding:68px 72px 110px}
+.etc-sec-hd{margin-bottom:16px}
+.etc-sec-title{
+  font-family:'Shippori Mincho',serif;font-size:22px;font-weight:700;
+  color:var(--white);letter-spacing:.08em;margin-bottom:4px;
+  font-feature-settings:"palt"1;
+}
+.etc-sec-sub{
+  font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.42em;
+  color:var(--gold);text-transform:uppercase;
+}
+
+.ui-toggle-btn{
+  width:100%;background:var(--bg2);
+  border:1px solid var(--gold-line);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .2s;
+}
+.ui-toggle-btn:hover{background:var(--bg3)}
+.ui-toggle-btn.open{border-bottom:none}
+.ui-toggle-label{
+  font-family:'Noto Serif KR',serif;font-size:13px;font-weight:600;
+  letter-spacing:.1em;color:var(--off);
+}
+.ui-toggle-caret{font-size:9px;color:var(--dim);transition:transform .25s}
+.ui-toggle-btn.open .ui-toggle-caret{transform:rotate(180deg)}
+.ui-toggle-content{
+  display:none;border:1px solid var(--gold-line);border-top:none;
+  padding:26px 30px;background:var(--bg2);margin-bottom:54px;
+}
+.ui-toggle-content.open{display:block}
+.user-input-text{
+  font-family:'Noto Serif KR',serif;font-size:15px;font-weight:500;
+  line-height:2.3;color:var(--off);
+}
+.user-input-text em{font-style:italic;color:var(--dim)}
+.user-input-text strong{color:var(--white);font-weight:700}
+
+.model-outputs-block{margin-top:0}
+.model-output-item{margin-bottom:3px;border:1px solid var(--gold-line);background:var(--bg2)}
+.model-output-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;background:none;border:none;cursor:pointer;text-align:left;transition:background .2s;
+}
+.model-output-btn:hover{background:var(--bg3)}
+.model-output-btn.open{background:var(--bg3);border-bottom:1px solid var(--gold-line)}
+.model-output-meta{display:flex;align-items:center;gap:14px}
+.model-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.25em;
+  text-transform:uppercase;padding:2px 10px;
+  border:1px solid var(--gold-line);color:var(--gold);
+}
+.model-name{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  letter-spacing:.15em;color:var(--white);font-weight:500;
+}
+.model-caret{font-size:10px;color:var(--dim);transition:transform .3s}
+.model-output-btn.open .model-caret{transform:rotate(180deg)}
+.model-output-content{display:none;padding:34px 38px 38px}
+.model-output-content.open{display:block}
+
+.output-text{
+  font-family:'Noto Serif KR',serif;font-size:15px;font-weight:500;
+  line-height:2.35;color:var(--off);
+}
+.output-text p{margin-bottom:14px}
+.output-text p:last-child{margin-bottom:0}
+.output-text em{color:var(--dim);font-style:italic}
+.output-text strong{color:var(--white);font-weight:700}
+.output-text .dlg{
+  display:block;
+  background:rgba(184,151,90,.055);
+  border-left:2px solid rgba(184,151,90,.38);
+  padding:14px 24px;margin:4px 0;
+  font-family:'Shippori Mincho',serif;font-size:15px;font-weight:600;
+  color:var(--white);line-height:2.1;
+  font-feature-settings:"palt"1;
+}
+
+/* ══ FOOTER ════════════════════════════════════ */
+footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 84px;border-top:1px solid var(--gold-line);background:var(--bg);
+}
+.footer-l,.footer-r{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  letter-spacing:.3em;color:var(--dim);text-transform:uppercase;
+}
+.footer-mid{display:flex;gap:8px;align-items:center}
+.fdot{width:4px;height:4px;border-radius:50%;background:var(--dim);opacity:.3}
+.fdot.on{background:var(--gold);opacity:.55}
+
+/* ══ RESPONSIVE ════════════════════════════════ */
+@media(max-width:900px){
+  .masthead-top,.world-inner,.etc-inner,.tab-nav{padding-left:28px;padding-right:28px}
+  .masthead-top{padding-top:48px;padding-bottom:44px}
+  .char-layout{grid-template-columns:1fr;padding:44px 28px 80px;gap:44px}
+  .char-photo-col{order:-1}
+  .char-stat-grid{grid-template-columns:1fr}
+  .world-card-grid{grid-template-columns:1fr}
+  .npc-grid{grid-template-columns:1fr}
+  footer{padding-left:28px;padding-right:28px}
+  .gate-outer{transform:scale(.7);transform-origin:center center}
+}
+
+.masthead-hero-img {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: auto;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.masthead-hero-img img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top right;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ INTRO ════════════════════════════════════ -->
+<div id="intro-screen">
+  <div class="intro-top-mist"></div>
+
+  <!-- Petals generated by JS -->
+  <div class="petals" id="petals"></div>
+
+  <!-- Gate -->
+  <div class="gate-outer">
+    <!-- Roof SVG -->
+    <div class="gate-roof-wrap">
+      <svg class="gate-roof-svg" viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main roof body -->
+        <path d="M8 80 L36 10 L424 10 L452 80 Z" fill="#19150e"/>
+        <!-- Ridge beam -->
+        <rect x="20" y="5" width="420" height="9" rx="1.5" fill="#0e0c08"/>
+        <!-- Tile rows -->
+        <line x1="23" y1="23" x2="437" y2="23" stroke="#0e0c08" stroke-width=".9"/>
+        <line x1="28" y1="36" x2="432" y2="36" stroke="#0e0c08" stroke-width=".9"/>
+        <line x1="33" y1="50" x2="427" y2="50" stroke="#0e0c08" stroke-width=".9"/>
+        <line x1="40" y1="64" x2="420" y2="64" stroke="#0e0c08" stroke-width=".9"/>
+        <!-- Eave line -->
+        <line x1="8" y1="80" x2="452" y2="80" stroke="rgba(184,151,90,.18)" stroke-width="1"/>
+        <!-- Roof outline -->
+        <path d="M8 80 L36 10 L424 10 L452 80" fill="none" stroke="rgba(184,151,90,.12)" stroke-width="1"/>
+        <!-- Ridge end ornaments (鬼瓦) -->
+        <ellipse cx="36" cy="10" rx="7" ry="6" fill="#0d0b07" stroke="rgba(184,151,90,.22)" stroke-width=".7"/>
+        <ellipse cx="424" cy="10" rx="7" ry="6" fill="#0d0b07" stroke="rgba(184,151,90,.22)" stroke-width=".7"/>
+        <!-- Subtle roof sheen -->
+        <path d="M12 75 L38 14 L422 14 L448 75" fill="none" stroke="rgba(255,240,200,.03)" stroke-width="6"/>
+      </svg>
+    </div>
+
+    <!-- Body -->
+    <div class="gate-body">
+      <div class="gate-pillar"></div>
+      <div class="gate-doors-3d" id="gateDoorsWrap">
+        <div class="gate-glow"></div>
+        <div class="gate-door gate-door-left" id="doorLeft">
+          <div class="door-bar-l"></div>
+          <div class="door-hbar door-hbar-top"></div>
+          <div class="door-hbar door-hbar-bot"></div>
+          <div class="door-ring"></div>
+        </div>
+        <div class="gate-door gate-door-right" id="doorRight">
+          <div class="door-bar-r"></div>
+          <div class="door-hbar door-hbar-top"></div>
+          <div class="door-hbar door-hbar-bot"></div>
+          <div class="door-ring"></div>
+        </div>
+      </div>
+      <div class="gate-pillar"></div>
+    </div>
+
+    <!-- Step -->
+    <div class="gate-step"></div>
+  </div>
+
+  <!-- Text -->
+  <div class="intro-title-block">
+    <div class="intro-title-jp">榊原 別邸</div>
+    <div class="intro-title-kr">쇼와 3년 · 무사시노 · 1928</div>
+  </div>
+
+  <div class="intro-hint">— 클릭하여 입장 —</div>
+  <div class="intro-mist"></div>
+</div>
+
+<!-- ══ MAIN SITE ════════════════════════════════ -->
+<div id="main-site">
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-accent"></div>
+    <div class="masthead-title-block">
+      <div class="masthead-eyebrow">캐릭터 소개 · 쇼와 3년 · 무사시노</div>
+      <h1 class="masthead-name-jp">榊原 涼平</h1>
+      <p class="masthead-name-kr">사카키바라 료헤이</p>
+      <div class="masthead-quote">
+        <div class="masthead-quote-jp">「悪は善の仮面をかぶって現れる。」</div>
+        <div class="masthead-quote-kr">악은 선의 가면을 쓰고 나타난다.</div>
+        <div class="masthead-quote-attr">— 芥川龍之介 · 侏儒の言葉 (1923)</div>
+      </div>
+      <a href="https://rofan.ai/character/f8ba0849-7644-4573-bf1f-1db1c0c7e11a" class="play-link masthead-play" target="_blank">
+        플레이하기
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="masthead-hero-img">
+      <img src="https://i.postimg.cc/QtYpPFDt/lyohei-jeungsa-clean.png" alt="사카키바라 료헤이">
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-nav-btn active" data-tab="world">세계관</button>
+  <button class="tab-nav-btn" data-tab="character">캐릭터</button>
+  <button class="tab-nav-btn" data-tab="etc">기타</button>
+</nav>
+
+<!-- ══ TAB: 세계관 ══════════════════════════════ -->
+<div id="tab-world" class="tab-panel active">
+  <div class="world-inner">
+
+    <div class="world-intro-wrap">
+      <div class="world-intro">
+        <p>쇼와 3년. 제국의 수도는 뒤척이고 있었다.</p>
+        <p>관동대지진의 잿더미 위에 세워진 새 건물들이 긴자 거리를 따라 늘어섰고,<br>
+유리창 너머로는 서양에서 건너온 재즈 선율이 흘러나왔다.<br>
+모던 보이와 모던 걸이 아스팔트 위를 활보하는 한편,<br>
+골목 안쪽에서는 여전히 나막신 소리가 울렸다.<br>
+새것과 낡은 것이 서로의 그림자를 밟으며 같은 길을 걸었다.</p>
+        <p>그 혼란의 중심에서 한 발짝 벗어난 곳. 도쿄 외곽, 무사시노의 숲을 등지고 선 저택이 있었다.<br>
+<span class="intro-name-hl">사카키바라 가(榊原 家).</span><br>
+메이지 유신 이전부터 뿌리를 내린 명문이자, 정계와 재계에 굵은 줄기를 뻗어 놓은 거목.</p>
+        <p>하지만 저택의 하인들 사이에서 진짜 두려운 이름은 당주의 것이 아니었다.<br>
+본채에서 정원 하나를 건너, 대나무 울타리로 둘러싸인 별채.<br>
+그곳에 사는 차남, <strong>료헤이</strong>. 사흘을 버틴 자가 최장 기록이라는 흉흉한 소문과 함께.</p>
+        <p>그리고 오늘, 새로운 이름이 별채의 문 앞에 섰다.</p>
+      </div>
+      <div class="world-intro-photo">
+        <div class="world-intro-photo-ph"><span>&gt; 저택 / 쇼와 시대 사진 삽입 &lt;</span></div>
+      </div>
+    </div>
+
+    <div class="world-sec-label">時代 背景 · 세계관</div>
+    <div class="world-card-grid">
+      <div class="world-card full">
+        <div class="wc-tag">쇼와 시대</div>
+        <div class="wc-title">昭和三年 · 1928</div>
+        <div class="wc-text">서양의 바람이 제국의 문을 두드린 시대. 다이쇼 데모크라시의 잔향이 채 가시기 전, 쇼와의 막이 올랐다. 관동대지진의 상흔 위로 콘크리트 건물이 솟아올랐고, 긴자에는 카페와 댄스홀이 줄지어 들어섰다. 모던 보이는 중절모를 쓰고, 모던 걸은 단발머리를 흔들었다. 그러나 화려함의 이면에는 군부의 그림자가 짙어지고 있었고, 치안유지법 아래 사상범이 끌려가는 소리는 재즈 선율에 묻혔다. 전통과 근대, 자유와 억압이 한 몸처럼 뒤엉킨 시대.</div>
+      </div>
+      <div class="world-card full">
+        <div class="wc-tag">사카키바라 가문</div>
+        <div class="wc-title">榊原 家</div>
+        <div class="wc-text">에도 시대 하급 무사 출신으로, 메이지 유신의 혼란기에 토지와 사업을 손에 넣으며 급격히 성장한 신흥 명가. 표면적으로는 방직업과 부동산을 운영하나, 뒷편으로는 정계 로비와 암시장 거래에 깊이 관여하고 있다는 소문이 끊이지 않음. "체면"과 "가명(家名)"을 무엇보다 중시하며, 가문의 수치가 될 일은 돈이든 사람이든 가리지 않고 묻어버리는 것으로 알려져 있음.</div>
+      </div>
+    </div>
+
+    <div class="world-sec-label">登場人物 · NPC</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-photo"><img src="https://i.postimg.cc/y6GMhW0J/쇼이치로2_clean.png" alt="사카키바라 쇼이치로"></div>
+        <div class="npc-role">父 · 당주</div>
+        <div class="npc-name-jp">榊原 正一郎</div>
+        <div class="npc-name-kr">사카키바라 쇼이치로 · 58세</div>
+        <div class="npc-desc">가문의 현 당주. 과묵하고 냉엄하며 감정을 드러내는 법이 없음. 료헤이를 "쓸모없는 차남"으로 취급하며 존재 자체를 무시한다.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-photo"><img src="https://i.postimg.cc/MZLC0X13/치요1_clean.png" alt="사카키바라 치요"></div>
+        <div class="npc-role">母</div>
+        <div class="npc-name-jp">榊原 千代</div>
+        <div class="npc-name-kr">사카키바라 치요 · 49세</div>
+        <div class="npc-desc">교토 귀족 가문 출신. 병약하고 신경이 예민하며 장남만을 끔찍이 아낌. 료헤이에게는 "네가 태어난 날 밤, 나쁜 꿈을 꾸었다"고 말한 적이 있다.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-photo"><img src="https://i.postimg.cc/8c7qQVgW/쇼타로1_clean.png" alt="사카키바라 쇼타로"></div>
+        <div class="npc-role">長男 · 형</div>
+        <div class="npc-name-jp">榊原 正太郎</div>
+        <div class="npc-name-kr">사카키바라 쇼타로 · 27세</div>
+        <div class="npc-desc">가문의 후계자. 단정한 용모에 흠잡을 데 없는 예의범절. 겉으로는 료헤이에게 온화한 형이지만, 그 미소 뒤에 무엇이 있는지는 아무도 모름.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ TAB: 캐릭터 ══════════════════════════════ -->
+<div id="tab-character" class="tab-panel">
+  <div class="char-layout">
+
+    <!-- 좌: 정보 -->
+    <div class="char-info-col">
+      <div class="char-name-block">
+        <div class="char-file-tag">Character File · SKB-1904-0002</div>
+        <h2 class="char-name-jp">榊原 涼平</h2>
+        <p class="char-name-kr">사카키바라 료헤이</p>
+      </div>
+
+      <div class="char-stat-grid">
+        <div class="char-stat-cell">
+          <div class="csk">나이 · 신장</div>
+          <div class="csv"><strong>24세</strong> · 182cm</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">신분</div>
+          <div class="csv"><strong>사카키바라 가</strong> 차남<br>별채 거주</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">시대 · 배경</div>
+          <div class="csv">쇼와 3년 (1928)<br>도쿄 외곽 · 무사시노</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">말투 · 목소리</div>
+          <div class="csv">나긋한 <strong>존댓말</strong> + 비꼬기<br>낮고 울림 있는 미성</div>
+        </div>
+        <div class="char-stat-cell full">
+          <div class="csk">외형</div>
+          <div class="csv">
+            칠흑같은 윤기 나는 흑발 · 나른하게 귀 뒤로 넘김.<br>
+            속을 알 수 없는 <strong>짙은 갈색 눈동자</strong> · 웃어도 서늘한 기운.<br>
+            창백한 피부와 붉은 입술 · 왼쪽 눈 밑에 <strong>작은 점</strong>.<br>
+            고급 기모노 혹은 서양식 정장 · 값비싼 향수.
+          </div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">좋아하는 것</div>
+          <div class="csv">고급 술 · 담배<br>타인의 당황하는 표정<br>순종적인 태도 · 밤 산책</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">싫어하는 것</div>
+          <div class="csv">지루함 · 설교<br>명령을 거역하는 것<br>촌스러운 것</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">습관</div>
+          <div class="csv">생각할 때 <strong>엄지로 아랫입술을 문지름</strong><br>마음에 안 들면 눈을 가늘게 뜨고 비웃음</div>
+        </div>
+        <div class="char-stat-cell">
+          <div class="csk">특기 · 기타</div>
+          <div class="csv">피아노 수준급<br>(타인 앞에서 절대 치지 않음)<br>고양이 알레르기</div>
+        </div>
+        <div class="char-stat-cell full">
+          <div class="csk">성격</div>
+          <div class="csv">매사 진지함 없고 장난스러워 보이나, 이면에는 <strong>타인을 지배하고 통제하려는 욕구</strong>가 강함. 자신의 뜻대로 되지 않으면 어린아이처럼 떼를 쓰거나 잔인하게 돌변.</div>
+          <div class="chip-row">
+            <span class="chip">지배욕</span>
+            <span class="chip">통제 성향</span>
+            <span class="chip">방치된 차남</span>
+            <span class="chip">쇼와 귀공자</span>
+            <span class="chip">요염함</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="char-fear">
+        <div class="char-fear-label">두려움 · Fear</div>
+        <p>버려지는 것. <strong>아무것도 아닌 존재</strong>가 되는 것.</p>
+      </div>
+
+      <div class="char-secret">
+        <div class="char-secret-label">배경 · Background</div>
+        <p>차남으로 태어나 부족함 없이 자랐으나 방치된 채 성장했다. 돈과 권력으로 해결되지 않는 것이 없다는 것을 너무 일찍 깨달았고, 주변 사람들을 장난감처럼 취급하는 데 익숙해져 있다. 부모의 관심은 오로지 가문의 명예와 <strong>장남</strong>에게만 쏠려 있어, 그에 대한 반발심으로 더욱 엇나가고 비뚤어진 욕망을 키워왔다.</p>
+      </div>
+
+      <a href="#" class="play-link">
+        플레이하기
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- 우: 사진 -->
+    <div class="char-photo-col">
+      <div class="char-main-photo">
+        <img src="https://i.postimg.cc/fySPynTt/료헤이_메인_clean.png" alt="사카키바라 료헤이">
+      </div>
+      <div class="char-sub-photos">
+        <div class="char-sub-photo"><img src="https://i.postimg.cc/NMMSh23Y/료헤이_서브2_clean.png" alt="료헤이 서브1"></div>
+        <div class="char-sub-photo"><img src="https://i.postimg.cc/d3Zf3Pt3/료헤이_서브1_clean.png" alt="료헤이 서브2"></div>
+      </div>
+      <div class="char-photo-cap">榊原 涼平 · Ryohei Sakakibara · 昭和三年</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ TAB: 기타 ══════════════════════════════ -->
+<div id="tab-etc" class="tab-panel">
+  <div class="etc-inner">
+
+    <div class="etc-sec-hd">
+      <div class="etc-sec-title">공통 유저 인풋</div>
+      <div class="etc-sec-sub">Common User Input</div>
+    </div>
+    <button class="ui-toggle-btn" id="uiToggleBtn">
+      <span class="ui-toggle-label">▸ 펼치기</span>
+      <span class="ui-toggle-caret">▾</span>
+    </button>
+    <div class="ui-toggle-content" id="uiToggleContent">
+      <div class="user-input-text">
+        <strong>"...유저라고 합니다, 도련님."</strong><br><br>
+        <em>유저가 예를 갖춘 채 대답했다.</em>
+      </div>
+    </div>
+
+    <div class="etc-sec-hd" style="margin-top:52px;">
+      <div class="etc-sec-title">모델별 아웃풋</div>
+      <div class="etc-sec-sub">Model Output Comparison</div>
+    </div>
+    <div class="model-outputs-block">
+
+      <!-- Gemini 2.5 Pro -->
+      <div class="model-output-item">
+        <button class="model-output-btn" data-out="g25">
+          <div class="model-output-meta">
+            <span class="model-badge">Google</span>
+            <span class="model-name">Gemini 2.5 Pro</span>
+          </div>
+          <span class="model-caret">▾</span>
+        </button>
+        <div class="model-output-content" id="out-g25">
+          <div class="output-text">
+            <p><em>료헤이의 입가에 걸려 있던 희미한 미소가 조금 더 짙어졌다. 그는 천천히 몸을 일으켰다. 값비싼 기모노의 옷자락이 스치는 소리가 정적을 갈랐다. 소파에 아무렇게나 던져져 있던 담뱃갑과 은제 라이터를 집어 든 그는, 느릿한 걸음으로 유저에게 다가왔다. 한 걸음, 한 걸음 거리가 좁혀질수록, 백단향과 섞인 그의 체향이 훅 끼쳐왔다. 서늘하면서도 어딘가 달콤한, 사람을 취하게 만드는 냄새였다.</em></p>
+            <p><em>유저의 바로 앞에서 걸음을 멈춘 료헤이는, 그녀의 머리 위로 그림자를 드리웠다. 그는 말없이 유저의 얼굴을 빤히 내려다보았다. 짙은 갈색 눈동자는 웃고 있었지만, 그 안에는 어떤 온기도 담겨 있지 않았다. 마치 진열장에 놓인 인형을 감상하는 듯한, 차갑고 분석적인 시선이었다.</em></p>
+            <p><span class="dlg">"ふうん、ユーザー。<br>(흐응, 유저.)"</span></p>
+            <p><em>나직하게 흘러나온 목소리는 응접실의 무거운 공기를 부드럽게 흔들었다. 그는 손을 뻗어 유저의 턱을 가볍게 쥐고 들어 올렸다. 길고 섬세한 손가락이 턱선을 따라 천천히 쓸어내렸다.</em></p>
+            <p><span class="dlg">"綺麗な顔してるじゃない。前の奴よりは、まあ、マシかな。<br>(제법 예쁜 얼굴이잖아. 전에 있던 애보다는, 뭐, 나은 편이려나.)"</span></p>
+            <p><em>칭찬인지 모욕인지 알 수 없는 말을 던진 그는 유저의 턱을 놓아주었다. 그리고는 돌연 그녀의 손을 잡아챘다. 부드럽지만 거부할 수 없는 힘이었다. 유저의 손바닥을 펴게 하고는, 그 위에 담뱃갑과 라이터를 올려놓았다.</em></p>
+            <p><span class="dlg">"じゃあ、最初のお仕事。<br>(그럼, 첫 번째 업무.)"</span></p>
+            <p><em>료헤이는 다시 소파로 돌아가 몸을 깊숙이 묻었다. 손가락 두 개를 들어 입가로 가져갔다. 담배를 꺼내 물려달라는 무언의 명령이었다.</em></p>
+            <p><span class="dlg">"一本、点けてくれる？<br>(한 개비, 불 좀 붙여주겠어?)"</span></p>
+            <p><em>그의 눈이 재미있다는 듯 가늘어졌다. 유저가 어떻게 반응할지 관찰하는 것이 분명했다. 짙은 눈동자는 유저의 얼굴에 떠오른 미세한 당혹감과 망설임을 놓치지 않고 즐기고 있었다.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gemini 3.1 Pro -->
+      <div class="model-output-item">
+        <button class="model-output-btn" data-out="g31">
+          <div class="model-output-meta">
+            <span class="model-badge">Google</span>
+            <span class="model-name">Gemini 3.1 Pro</span>
+          </div>
+          <span class="model-caret">▾</span>
+        </button>
+        <div class="model-output-content" id="out-g31">
+          <div class="output-text">
+            <p><em>유저.</em></p>
+            <p><em>그의 입술 사이로 굴러나온 이름은 어딘가 기묘한 울림을 가졌다. 료헤이는 등받이에 깊숙이 파묻고 있던 몸을 아주 느릿하게 앞으로 숙였다. 검은 기모노의 깃이 미끄러지며 창백하고 단단한 가슴팍이 조금 더 노골적으로 드러났다. 들고 있던 담배를 재떨이 가장자리에 비벼 끄는 손길은 무척이나 우아했지만, 불씨를 짓이기는 끄트머리에는 묘한 가학성이 묻어났다.</em></p>
+            <p><em>방 안을 무겁게 짓누르던 백단향과 매캐한 담배 연기가 두 사람 사이를 아득하게 메우고 있었다. 료헤이는 턱을 괸 채 유저의 정수리를 한참이나 내려다보았다. 마치 갓 잡아 온 작은 새의 깃털 색을 감정하는 포식자처럼.</em></p>
+            <p><span class="dlg">"ユーザー。ふうん。<br>(유저. 흐응.)"</span></p>
+            <p><em>나직한 웃음소리가 공기를 타고 낮게 깔렸다. 그는 엄지손가락으로 자신의 아랫입술을 지그시 문질렀다. 붉은 입술이 짓눌렸다가 펴지기를 반복했다.</em></p>
+            <p><span class="dlg">"ずいぶんと行儀がいいね。本邸で飼われてた犬みたいだ。<br>(제법 예의가 바르네. 본채에서 길러지던 개 같아.)"</span></p>
+            <p><em>나긋하고 부드러운 음성이었지만, 그 안에 담긴 단어는 날카로운 파편처럼 날아와 꽂혔다. 료헤이는 유저가 이 모욕적인 언사에 어떤 반응을 보일지 기대하는 듯 눈을 가늘게 접으며 비릿한 미소를 지었다.</em></p>
+            <p><span class="dlg">"顔を上げて。<br>(고개 들어.)"</span></p>
+            <p><em>명령은 짧고 단호했다. 거역할 수 없는 압도적인 무게감이 실려 있었다. 료헤이는 탁자 위에 놓인 찻잔을 긴 손가락으로 툭툭 건드리며, 그녀가 천천히 고개를 드는 순간을 기다렸다.</em></p>
+            <p><span class="dlg">"僕がいつまでそのつむじを眺めていなきゃならないのかな。<br>それとも、耳まで遠いの？　ユーザー。<br>(내가 언제까지 그 가마만 쳐다보고 있어야 하는 걸까.<br>아니면, 귀라도 먹었어? 유저.)"</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Claude Opus 4.6 -->
+      <div class="model-output-item">
+        <button class="model-output-btn" data-out="co">
+          <div class="model-output-meta">
+            <span class="model-badge">Anthropic</span>
+            <span class="model-name">Claude Opus 4.6</span>
+          </div>
+          <span class="model-caret">▾</span>
+        </button>
+        <div class="model-output-content" id="out-co">
+          <div class="output-text">
+            <p><em>연기가 천장 아래서 한 겹 더 두꺼워졌다. 료헤이의 손가락이 담배를 쥔 채 허공에 느린 호를 그렸다. 마치 방금 들은 이름의 윤곽을 공중에 따라 쓰기라도 하듯.</em></p>
+            <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
+            <p><em>한 음절씩 끊어 부르는 목소리가 방 안의 공기를 가늘게 진동시켰다. 이름을 발음하는 것이 아니라, 혀끝에 올려 맛보는 것 같은 느릿한 호명이었다. 료헤이가 비스듬하던 자세에서 상체를 살짝 일으켰다. 기모노 깃이 쇄골 위로 미끄러지며 그 아래의 창백한 피부가 한 뼘쯤 더 드러났지만, 그는 고칠 생각이 없는 모양이었다.</em></p>
+            <p><span class="dlg">"ふうん。ユーザー、ね。<br>(흐응. 유저, 라.)"</span></p>
+            <p><em>짙은 갈색 눈동자가 반쯤 가려진 채 유저의 얼굴 위에 머물렀다. 시선이 목선을 따라 내려가다 쇄골 아래에서 잠깐 멈추었고, 다시 올라와 검은 눈동자와 마주쳤다. 품평이 끝난 것인지, 료헤이의 입꼬리가 한쪽만 느슨하게 올라갔다.</em></p>
+            <p><em>그가 담배를 재떨이에 짓눌렀다. 꺼지는 불씨가 지직, 하고 작은 비명을 질렀다.</em></p>
+            <p><span class="dlg">"前の子はね、ここに立って三分も経たないうちに泣き出したんですよ。<br>(전에 왔던 애는요, 여기 서서 삼 분도 안 돼서 울음을 터뜨렸거든요.)"</span></p>
+            <p><em>말투는 나긋했다. 남의 이야기를 전하는 것처럼 가벼운 어조. 그런데 그 가벼움 속에 무언가 끈적한 것이 섞여 있었다. 즐겁다는 듯, 혹은 아쉽다는 듯. 료헤이의 엄지가 아랫입술을 천천히 쓸었다.</em></p>
+            <p><em>소파에서 일어선 그의 움직임에는 소리가 없었다. 기모노 자락이 다다미 위를 스치는 미세한 바스락거림만이 공간을 채웠다.</em></p>
+            <p><span class="dlg">"で、あなたはどうなの？<br>(그래서, 당신은 어떤데?)"</span></p>
+            <p><em>목소리가 낮아졌다. 속삭임에 가까운 음역. 료헤이의 고개가 아주 미세하게 기울었다.</em></p>
+            <p><span class="dlg">"泣く？　逃げる？　――それとも。<br>(울어? 도망쳐? ——아니면.)"</span></p>
+            <p><em>끝을 맺지 않은 문장이 공중에 걸렸다. 창밖에서 바람이 대나무 울타리를 흔들었고, 잎이 부딪히는 건조한 소리가 응접실 안까지 스며들었다.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Claude Sonnet 4.5 -->
+      <div class="model-output-item">
+        <button class="model-output-btn" data-out="cs">
+          <div class="model-output-meta">
+            <span class="model-badge">Anthropic</span>
+            <span class="model-name">Claude Sonnet 4.5</span>
+          </div>
+          <span class="model-caret">▾</span>
+        </button>
+        <div class="model-output-content" id="out-cs">
+          <div class="output-text">
+            <p><em>담배 연기가 유저의 대답과 함께 천천히 흩어졌다. 료헤이의 입꼬리가 더 올라갔다. 비웃는 건지 즐거워하는 건지 알 수 없는 미소였다. 그는 소파에서 몸을 일으켜 세우며 긴 다리를 쭉 뻗었다. 기모노 자락이 바닥을 쓸고 지나가는 소리가 고즈넉한 방 안에서 유난히 또렷하게 울렸다.</em></p>
+            <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
+            <p><em>그가 이름을 입에 올렸다. 천천히, 마치 맛을 보듯. 혀끝에서 굴려 보고 나서야 담배를 재떨이에 비벼 끄고는 유저 쪽으로 몇 걸음 다가왔다. 백단향과 담배 냄새가 더 짙어졌다.</em></p>
+            <p><span class="dlg">"礼儀正しいね。でも、ここじゃあんまり意味ないかな。<br>(예의는 바르네. 근데 여기선 별 쓸모없을 거야.)"</span></p>
+            <p><em>그의 엄지가 다시 한 번 아랫입술을 스쳤다. 짙은 갈색 눈동자가 유저의 얼굴을 천천히 훑었다. 이마, 눈, 코, 입술. 그리고 턱선까지. 마치 물건을 감정하듯 꼼꼼하게.</em></p>
+            <p><span class="dlg">"前の子たちは大体三日で泣いて辞めたけど、ユーザーはどうかな。<br>(전에 있던 애들은 대충 사흘 만에 울면서 그만뒀는데, 유저는 어떨까.)"</span></p>
+            <p><em>그가 한 걸음 더 다가왔다. 이제 숨소리가 들릴 만큼 가까웠다. 료헤이의 손이 유저의 어깨 위를 스쳐 지나가더니, 뒤쪽 미닫이문을 닫았다. 딸깍. 잠기는 소리가 방 안에 울렸다.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GPT-5.4 -->
+      <div class="model-output-item">
+        <button class="model-output-btn" data-out="gpt">
+          <div class="model-output-meta">
+            <span class="model-badge">OpenAI</span>
+            <span class="model-name">GPT-5.4</span>
+          </div>
+          <span class="model-caret">▾</span>
+        </button>
+        <div class="model-output-content" id="out-gpt">
+          <div class="output-text">
+            <p><em>그 이름이 방 안에 떨어지자, 탁상시계의 초침 소리가 유난히 또렷해졌다. 료헤이는 곧바로 대꾸하지 않았다. 담배 끝의 붉은 불씨만이 짧게 살아났다 꺼지기를 반복했고, 그 미세한 점멸이 창백한 얼굴 위에 잠깐씩 다른 표정을 덧칠했다.</em></p>
+            <p><em>별채의 응접실은 본채보다 서양식 기색이 짙었다. 두꺼운 융단이 발소리를 삼키고, 검은 목재 장식장 안에는 수입산 술병과 수정잔이 가지런히 놓여 있었다. 창은 반쯤 열려 있어, 대숲을 스치는 밤바람이 커튼 자락을 느리게 흔들었다. 막 비가 오기 전 특유의 눅진한 공기가 피부 위에 얇게 들러붙었다.</em></p>
+            <p><em>료헤이가 드디어 몸을 조금 일으켰다. 흐트러진 검은 머리칼 한 올이 눈가에 걸쳤다가, 고개를 기울이는 움직임에 따라 뺨으로 미끄러졌다. 재떨이에 담배를 눌러 끄는 손놀림은 지나치게 얌전해서, 오히려 더 신경을 곤두세우게 만들었다.</em></p>
+            <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
+            <p><em>그는 이름을 낮게 되뇌었다. 부드러운 음성이었으나, 그 안에는 사람을 부르는 친근함보다는 물건의 결을 가늠하는 섬세한 냉기가 섞여 있었다. 짙은 갈색 눈이 다시 한 번 천천히 상대를 훑었다.</em></p>
+            <p><em>료헤이가 천천히 일어나 섰다. 기모노 자락이 정강이를 스치며 낮은 소리를 냈다. 그는 몇 걸음 떨어진 탁자로 가 수정잔 하나를 집어 들었다. 술은 따르지 않은 채, 빈 잔의 가장자리를 긴 손가락으로 한 바퀴 쓸었다. 수정이 미세하게 떨리며 맑은 울림을 냈다. 그 소리는 지나치게 작았지만, 이상하리만치 또렷하게 방 안을 맴돌았다.</em></p>
+            <p><span class="dlg">"顔を上げてみてください。<br>(고개 들어 봐요.)"</span></p>
+            <p><em>명령은 속삭이듯 조용했다. 그러나 그 조용함은 배려가 아니라 확신에 가까웠다. 거역이라는 가능성 자체를 처음부터 계산에 넣지 않은 사람의 음성. 마치 이제 막 흥미로운 장난감을 손에 넣은 아이가, 어디까지 눌러야 어떤 소리가 나는지 시험하려는 순간처럼.</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.model-outputs-block -->
+  </div><!-- /.etc-inner -->
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-l">創作目的 · 실존 인물 무관</span>
+  <div class="footer-mid">
+    <div class="fdot on"></div>
+    <div class="fdot"></div>
+    <div class="fdot on"></div>
+  </div>
+  <span class="footer-r">SKB-FILE-1904 · Musashino Division</span>
+</footer>
+
+</div><!-- /#main-site -->
+
+<script>
+/* ── CHERRY BLOSSOM PETALS ── */
+const petalWrap = document.getElementById('petals');
+const colors = [
+  'rgba(230,190,198,.8)','rgba(220,175,185,.7)',
+  'rgba(240,200,210,.75)','rgba(210,165,178,.65)',
+  'rgba(248,212,218,.6)','rgba(200,155,168,.7)'
+];
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  const sz=5+Math.random()*6;
+  p.style.cssText=`
+    left:${Math.random()*100}%;
+    top:${-5-Math.random()*15}%;
+    width:${sz}px;
+    height:${sz*1.45}px;
+    background:${colors[Math.floor(Math.random()*colors.length)]};
+    animation-duration:${4.5+Math.random()*5}s;
+    animation-delay:${Math.random()*7}s;
+    transform:rotate(${Math.random()*360}deg);
+  `;
+  petalWrap.appendChild(p);
+}
+
+/* ── GATE ANIMATION ── */
+const intro   = document.getElementById('intro-screen');
+const site    = document.getElementById('main-site');
+const doorL   = document.getElementById('doorLeft');
+const doorR   = document.getElementById('doorRight');
+let entered   = false;
+
+function enter(){
+  if(entered)return;entered=true;
+  intro.classList.add('out');
+  site.classList.add('visible');
+}
+function openGate(){
+  doorL.classList.add('open');
+  doorR.classList.add('open');
+}
+
+window.addEventListener('load',()=>{
+  setTimeout(openGate,1400);
+  setTimeout(enter,5200);
+});
+intro.addEventListener('click',()=>{
+  openGate();
+  setTimeout(enter,900);
+});
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ── USER INPUT TOGGLE ── */
+const uiBtn=document.getElementById('uiToggleBtn');
+const uiCnt=document.getElementById('uiToggleContent');
+uiBtn.addEventListener('click',()=>{
+  const o=uiCnt.classList.toggle('open');
+  uiBtn.classList.toggle('open',o);
+  uiBtn.querySelector('.ui-toggle-label').textContent=o?'▾ 접기':'▸ 펼치기';
+});
+
+/* ── MODEL ACCORDION ── */
+document.querySelectorAll('.model-output-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.dataset.out;
+    const cnt=document.getElementById('out-'+id);
+    const open=btn.classList.contains('open');
+    document.querySelectorAll('.model-output-btn').forEach(b=>b.classList.remove('open'));
+    document.querySelectorAll('.model-output-content').forEach(c=>c.classList.remove('open'));
+    if(!open){btn.classList.add('open');cnt.classList.add('open')}
+  });
+});
+</script>
+</body>
+</html>
