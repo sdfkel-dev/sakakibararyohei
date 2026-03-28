@@ -180,12 +180,12 @@ img{display:block}
   text-shadow:0 0 20px rgba(184,151,90,0.3);
 }
 .intro-title-kr{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.55em;color:var(--dim);text-transform:uppercase;
 }
 .intro-hint{
   position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.35em;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.26em;
   color:rgba(240,236,227,0.18);z-index:2;white-space:nowrap;
   animation:hintPulse 2.4s ease-in-out infinite;
 }
@@ -242,7 +242,7 @@ img{display:block}
 }
 .masthead-title-block{flex:1}
 .masthead-eyebrow{
-  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.5em;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.38em;
   color:var(--gold);text-transform:uppercase;margin-bottom:22px;
   display:flex;align-items:center;gap:14px;
 }
@@ -266,11 +266,11 @@ img{display:block}
   font-feature-settings:"palt"1;
 }
 .masthead-quote-kr{
-  font-family:'Noto Serif KR',serif;font-size:12.5px;font-style:italic;
+  font-family:'Noto Serif KR',serif;font-size:14px;font-style:italic;
   line-height:1.9;color:var(--dim);
 }
 .masthead-quote-attr{
-  margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:8px;
+  margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.32em;color:var(--gold);opacity:.65;text-transform:uppercase;
 }
 
@@ -306,18 +306,33 @@ img{display:block}
 
 /* intro two-col */
 .world-intro-wrap{
-  display:grid;grid-template-columns:1fr 280px;
-  gap:48px;align-items:start;
+  display:flex;flex-direction:column;
+  gap:0;
   margin-bottom:80px;
 }
+.world-intro-banner{
+  width:100%;aspect-ratio:21/7;
+  background:var(--bg3);border:1px solid var(--gold-line);
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  margin-bottom:52px;
+}
+.world-intro-banner img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:sepia(.25) contrast(1.05);transition:transform .7s;
+}
+.world-intro-banner:hover img{transform:scale(1.02)}
+.world-intro-banner-ph{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;
+  letter-spacing:.22em;color:var(--dim);text-align:center;line-height:2.2;
+}
 .world-intro{
-  padding:0 0 0 30px;
-  border-left:2px solid rgba(184,151,90,.22);
+  max-width:780px;margin:0 auto;
+  text-align:center;
 }
 .world-intro p{
   font-family:'Noto Serif KR',serif;font-size:15px;font-weight:400;
-  line-height:2.65;color:var(--off);margin-bottom:28px;
-  word-break:keep-all;overflow-wrap:break-word;
+  line-height:2.8;color:var(--off);margin-bottom:32px;
+  word-break:keep-all;
 }
 .world-intro p:last-child{margin-bottom:0}
 .world-intro strong{color:var(--white)}
@@ -331,29 +346,10 @@ img{display:block}
   font-feature-settings:"palt"1;
 }
 
-/* intro 사진 칸 */
-.world-intro-photo{
-  position:sticky;top:72px;
-  width:100%;aspect-ratio:2/3;
-  background:var(--bg3);border:1px solid var(--gold-line);
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.world-intro-photo img{
-  width:100%;height:100%;object-fit:cover;
-  object-position:center;
-  filter:sepia(.2) contrast(1.03);
-  transition:transform .7s ease;
-}
-.world-intro-photo:hover img{transform:scale(1.04)}
-.world-intro-photo-ph{
-  font-family:'IBM Plex Mono',monospace;font-size:9px;
-  letter-spacing:.22em;color:var(--dim);text-align:center;line-height:2.2;
-  padding:16px;
-}
+
 
 .world-sec-label{
-  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.5em;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.38em;
   color:var(--gold);text-transform:uppercase;margin-bottom:30px;
   display:flex;align-items:center;gap:14px;
 }
@@ -367,7 +363,7 @@ img{display:block}
 .world-card{background:var(--bg2);padding:34px 38px}
 .world-card.full{grid-column:1/-1}
 .wc-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.32em;
   color:var(--gold);text-transform:uppercase;margin-bottom:14px;
   display:flex;align-items:center;gap:8px;
 }
@@ -400,13 +396,13 @@ img{display:block}
 }
 .npc-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(.12) contrast(1.05)}
 .npc-photo-ph{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.2em;color:var(--dim);text-align:center;line-height:2;
 }
-.npc-role{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:7px}
+.npc-role{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:7px}
 .npc-name-jp{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px;font-feature-settings:"palt"1}
-.npc-name-kr{font-family:'Noto Serif KR',serif;font-size:11px;color:var(--dim);letter-spacing:.15em;margin-bottom:13px}
-.npc-desc{font-family:'Noto Serif KR',serif;font-size:12.5px;line-height:2.1;color:var(--off)}
+.npc-name-kr{font-family:'Noto Serif KR',serif;font-size:13px;color:var(--dim);letter-spacing:.13em;margin-bottom:13px}
+.npc-desc{font-family:'Noto Serif KR',serif;font-size:14px;line-height:2.2;color:var(--off)}
 
 /* ══ 캐릭터 TAB ════════════════════════════════ */
 .char-layout{
@@ -443,11 +439,11 @@ img{display:block}
 .char-sub-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(.12) contrast(1.05);transition:transform .6s}
 .char-sub-photo:hover img{transform:scale(1.06)}
 .char-sub-ph{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.15em;color:var(--dim);text-align:center;line-height:1.9;padding:8px;
 }
 .char-photo-cap{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.3em;color:var(--dim);text-align:center;text-transform:uppercase;
 }
 
@@ -465,7 +461,7 @@ img{display:block}
   color:var(--white);letter-spacing:.13em;line-height:1;margin-bottom:8px;
   font-feature-settings:"palt"1;
 }
-.char-name-kr{font-family:'Noto Serif KR',serif;font-size:13px;letter-spacing:.42em;color:var(--dim)}
+.char-name-kr{font-family:'Noto Serif KR',serif;font-size:15px;letter-spacing:.32em;color:var(--dim)}
 
 .char-stat-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:1px;
@@ -476,10 +472,10 @@ img{display:block}
 .char-stat-cell:hover{background:var(--bg3)}
 .char-stat-cell.full{grid-column:1/-1}
 .csk{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.36em;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;
   color:var(--gold);text-transform:uppercase;margin-bottom:10px;
 }
-.csv{font-family:'Noto Serif KR',serif;font-size:13px;font-weight:500;color:var(--off);line-height:1.9}
+.csv{font-family:'Noto Serif KR',serif;font-size:14.5px;font-weight:500;color:var(--off);line-height:1.9}
 .csv strong{color:var(--white);font-weight:700}
 .chip-row{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
 .chip{
@@ -492,7 +488,7 @@ img{display:block}
   border-left:3px solid var(--crimson);padding:24px 28px;margin-bottom:14px;
 }
 .char-fear-label{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.32em;
   color:var(--crimson);text-transform:uppercase;margin-bottom:11px;
 }
 .char-secret{
@@ -500,7 +496,7 @@ img{display:block}
   border-left:3px solid rgba(184,151,90,.4);padding:24px 28px;margin-bottom:42px;
 }
 .char-secret-label{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.4em;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.32em;
   color:var(--gold);text-transform:uppercase;margin-bottom:11px;
 }
 .char-fear p,.char-secret p{
@@ -566,7 +562,7 @@ img{display:block}
 .model-output-btn.open{background:var(--bg3);border-bottom:1px solid var(--gold-line)}
 .model-output-meta{display:flex;align-items:center;gap:14px}
 .model-badge{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.25em;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;
   text-transform:uppercase;padding:2px 10px;
   border:1px solid var(--gold-line);color:var(--gold);
 }
@@ -603,7 +599,7 @@ footer{
   padding:20px 84px;border-top:1px solid var(--gold-line);background:var(--bg);
 }
 .footer-l,.footer-r{
-  font-family:'IBM Plex Mono',monospace;font-size:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.3em;color:var(--dim);text-transform:uppercase;
 }
 .footer-mid{display:flex;gap:8px;align-items:center}
@@ -705,7 +701,7 @@ footer{
   <!-- Text -->
   <div class="intro-title-block">
     <div class="intro-title-jp">榊原 別邸</div>
-    <div class="intro-title-kr">쇼와 3년 · 무사시노 · 1928</div>
+    <div class="intro-title-kr">쇼와 35년 · 무사시노 · 1960</div>
   </div>
 
   <div class="intro-hint">— 클릭하여 입장 —</div>
@@ -720,7 +716,7 @@ footer{
   <div class="masthead-top">
     <div class="masthead-accent"></div>
     <div class="masthead-title-block">
-      <div class="masthead-eyebrow">캐릭터 소개 · 쇼와 3년 · 무사시노</div>
+      <div class="masthead-eyebrow">캐릭터 소개 · 쇼와 35년 · 무사시노</div>
       <h1 class="masthead-name-jp">榊原 涼平</h1>
       <p class="masthead-name-kr">사카키바라 료헤이</p>
       <div class="masthead-quote">
@@ -751,23 +747,28 @@ footer{
   <div class="world-inner">
 
     <div class="world-intro-wrap">
-      <div class="world-intro">
-        <p>쇼와 3년. 제국의 수도는 뒤척이고 있었다.</p>
-        <p>관동대지진의 잿더미 위에 세워진 새 건물들이 긴자 거리를 따라 늘어섰고,<br>
-유리창 너머로는 서양에서 건너온 재즈 선율이 흘러나왔다.<br>
-모던 보이와 모던 걸이 아스팔트 위를 활보하는 한편,<br>
-골목 안쪽에서는 여전히 나막신 소리가 울렸다.<br>
-새것과 낡은 것이 서로의 그림자를 밟으며 같은 길을 걸었다.</p>
-        <p>그 혼란의 중심에서 한 발짝 벗어난 곳. 도쿄 외곽, 무사시노의 숲을 등지고 선 저택이 있었다.<br>
-<span class="intro-name-hl">사카키바라 가(榊原 家).</span><br>
-메이지 유신 이전부터 뿌리를 내린 명문이자, 정계와 재계에 굵은 줄기를 뻗어 놓은 거목.</p>
-        <p>하지만 저택의 하인들 사이에서 진짜 두려운 이름은 당주의 것이 아니었다.<br>
-본채에서 정원 하나를 건너, 대나무 울타리로 둘러싸인 별채.<br>
-그곳에 사는 차남, <strong>료헤이</strong>. 사흘을 버틴 자가 최장 기록이라는 흉흉한 소문과 함께.</p>
-        <p>그리고 오늘, 새로운 이름이 별채의 문 앞에 섰다.</p>
+      <!-- 배너 사진 (설명 위) -->
+      <div class="world-intro-banner">
+        <img src="https://i.postimg.cc/02zQmKhn/sakakibalaga-(1).png" alt="저택 사진" style="width:100%;height:100%;object-fit:cover;object-position:center;filter:sepia(.25) contrast(1.05)">
       </div>
-      <div class="world-intro-photo">
-        <div class="world-intro-photo-ph"><span>&gt; 저택 / 쇼와 시대 사진 삽입 &lt;</span></div>
+      <!-- 세계관 텍스트 가운데 정렬 -->
+      <div class="world-intro">
+        <p>쇼와 35년.<br>
+도쿄의 하늘은 공장 굴뚝의 연기와 새로 올라가는 빌딩의 유리창이 뒤섞여,<br>
+어디가 구름이고 어디가 매연인지 분간할 수 없는 시절이었다.</p>
+        <p>이 나라는 놀라운 속도로 제 살을 불려 나가고 있었다.<br>
+거리에는 자동차가 넘쳐흘렀고, 텔레비전 수상기가 가정마다 들어앉았으며,<br>
+네온사인이 긴자의 밤을 낮보다 환하게 물들였다.<br>
+돈이 돈을 낳고, 욕망이 욕망을 먹어치우는 시대.</p>
+        <p>그 소란의 한가운데서 변하지 않는 것들이 있었다.<br>
+도쿄 외곽, 수백 년 된 삼나무 숲에 둘러싸인 거대한 저택.<br>
+<span class="intro-name-hl">사카키바라 가(榊原 家).</span><br>
+변하지 않은 것이 아니었다 — 변하지 않는 척하는 법을 알고 있을 뿐.</p>
+        <p>그리고 그 저택의 가장 먼 구석.<br>
+본채에서 자갈길 하나를 건너야 닿는 별채.<br>
+삼나무 숲의 정적을 뚫고 재즈 트럼펫 소리가 새어 나오는 그곳.<br>
+<strong>사흘을 버틴 자가 최장 기록이라는, 차남 료헤이의 처소.</strong></p>
+        <p>그리고 오늘, 새로운 이름이 별채의 문 앞에 섰다.</p>
       </div>
     </div>
 
@@ -775,8 +776,8 @@ footer{
     <div class="world-card-grid">
       <div class="world-card full">
         <div class="wc-tag">쇼와 시대</div>
-        <div class="wc-title">昭和三年 · 1928</div>
-        <div class="wc-text">서양의 바람이 제국의 문을 두드린 시대. 다이쇼 데모크라시의 잔향이 채 가시기 전, 쇼와의 막이 올랐다. 관동대지진의 상흔 위로 콘크리트 건물이 솟아올랐고, 긴자에는 카페와 댄스홀이 줄지어 들어섰다. 모던 보이는 중절모를 쓰고, 모던 걸은 단발머리를 흔들었다. 그러나 화려함의 이면에는 군부의 그림자가 짙어지고 있었고, 치안유지법 아래 사상범이 끌려가는 소리는 재즈 선율에 묻혔다. 전통과 근대, 자유와 억압이 한 몸처럼 뒤엉킨 시대.</div>
+        <div class="wc-title">昭和三年 · 1960</div>
+        <div class="wc-text">서양의 바람이 섬나라의 거리를 완전히 뒤바꿔 놓은 시대. 긴자의 네온사인은 밤하늘을 삼켰고, 텔레비전 수상기가 안방마다 자리를 차지했으며, 거리에는 자동차 경적과 유행가가 뒤섞여 울렸다. 청년들은 포마드로 머리를 빗어 넘기고, 재즈 킷사에서는 수입 레코드가 돌아갔다. 그러나 화려함의 이면에는 오래된 가문의 논리가 여전히 숨을 쉬고 있었다. 체면이 법보다 무거웠고, 가명(家名)이 개인의 목숨보다 앞섰다. 전통과 근대, 번영과 허영이 한 몸처럼 뒤엉킨 시대.</div>
       </div>
       <div class="world-card full">
         <div class="wc-tag">사카키바라 가문</div>
@@ -836,7 +837,7 @@ footer{
         </div>
         <div class="char-stat-cell">
           <div class="csk">시대 · 배경</div>
-          <div class="csv">쇼와 3년 (1928)<br>도쿄 외곽 · 무사시노</div>
+          <div class="csv">쇼와 35년 (1960)<br>도쿄 외곽 · 무사시노</div>
         </div>
         <div class="char-stat-cell">
           <div class="csk">말투 · 목소리</div>
@@ -874,7 +875,7 @@ footer{
             <span class="chip">지배욕</span>
             <span class="chip">통제 성향</span>
             <span class="chip">방치된 차남</span>
-            <span class="chip">쇼와 귀공자</span>
+            <span class="chip">쇼와 귀공자</span><span class="chip">고경제 성장기</span>
             <span class="chip">요염함</span>
           </div>
         </div>
@@ -947,16 +948,19 @@ footer{
         </button>
         <div class="model-output-content" id="out-g25">
           <div class="output-text">
-            <p><em>료헤이의 입가에 걸려 있던 희미한 미소가 조금 더 짙어졌다. 그는 천천히 몸을 일으켰다. 값비싼 기모노의 옷자락이 스치는 소리가 정적을 갈랐다. 소파에 아무렇게나 던져져 있던 담뱃갑과 은제 라이터를 집어 든 그는, 느릿한 걸음으로 유저에게 다가왔다. 한 걸음, 한 걸음 거리가 좁혀질수록, 백단향과 섞인 그의 체향이 훅 끼쳐왔다. 서늘하면서도 어딘가 달콤한, 사람을 취하게 만드는 냄새였다.</em></p>
-            <p><em>유저의 바로 앞에서 걸음을 멈춘 료헤이는, 그녀의 머리 위로 그림자를 드리웠다. 그는 말없이 유저의 얼굴을 빤히 내려다보았다. 짙은 갈색 눈동자는 웃고 있었지만, 그 안에는 어떤 온기도 담겨 있지 않았다. 마치 진열장에 놓인 인형을 감상하는 듯한, 차갑고 분석적인 시선이었다.</em></p>
-            <p><span class="dlg">"ふうん、ユーザー。<br>(흐응, 유저.)"</span></p>
-            <p><em>나직하게 흘러나온 목소리는 응접실의 무거운 공기를 부드럽게 흔들었다. 그는 손을 뻗어 유저의 턱을 가볍게 쥐고 들어 올렸다. 길고 섬세한 손가락이 턱선을 따라 천천히 쓸어내렸다.</em></p>
-            <p><span class="dlg">"綺麗な顔してるじゃない。前の奴よりは、まあ、マシかな。<br>(제법 예쁜 얼굴이잖아. 전에 있던 애보다는, 뭐, 나은 편이려나.)"</span></p>
-            <p><em>칭찬인지 모욕인지 알 수 없는 말을 던진 그는 유저의 턱을 놓아주었다. 그리고는 돌연 그녀의 손을 잡아챘다. 부드럽지만 거부할 수 없는 힘이었다. 유저의 손바닥을 펴게 하고는, 그 위에 담뱃갑과 라이터를 올려놓았다.</em></p>
-            <p><span class="dlg">"じゃあ、最初のお仕事。<br>(그럼, 첫 번째 업무.)"</span></p>
-            <p><em>료헤이는 다시 소파로 돌아가 몸을 깊숙이 묻었다. 손가락 두 개를 들어 입가로 가져갔다. 담배를 꺼내 물려달라는 무언의 명령이었다.</em></p>
-            <p><span class="dlg">"一本、点けてくれる？<br>(한 개비, 불 좀 붙여주겠어?)"</span></p>
-            <p><em>그의 눈이 재미있다는 듯 가늘어졌다. 유저가 어떻게 반응할지 관찰하는 것이 분명했다. 짙은 눈동자는 유저의 얼굴에 떠오른 미세한 당혹감과 망설임을 놓치지 않고 즐기고 있었다.</em></p>
+            <p><em>유저의 목소리는 조용한 응접실 안에서 얌전하게 울렸다. 료헤이는 끼고 있던 담배를 재떨이에 비벼 껐다. 아직 반이나 남은 담배였지만, 문득 흥미가 사라졌다는 듯이. 미세한 타닥, 소리와 함께 연기가 한 번 더 피어오르다 스러졌다. 턴테이블 위에서는 쳇 베이커의 나른한 목소리가 여전히 흐르고 있었다.</em></p>
+            <p><span class="dlg">"フーン、ユーザー。<br>(흐응, 유저.)"</span></p>
+            <p><em>료헤이는 소파에 누운 자세 그대로, 이름의 음절을 혀끝으로 굴리는 듯 나른하게 중얼거렸다. 기억할 생각 없다던 말과는 달리, 그는 이름을 두어 번 더 곱씹었다. 그러고는 천천히 몸을 일으켰다. 헐렁하게 풀려 있던 유카타의 옷깃이 스르륵 미끄러져, 탄탄한 가슴 한쪽이 더 넓게 드러났다. 그는 개의치 않고 긴 다리를 뻗어 카펫을 밟고 섰다. 182cm의 키가 만들어내는 그림자가 유저의 발치까지 길게 늘어졌다.</em></p>
+            <p><em>맨발로 다가오는 소리는 거의 들리지 않았다. 료헤이는 유저의 바로 앞, 숨결이 닿을 듯한 거리에서 걸음을 멈췄다. 그의 몸에서는 비싼 담배 향과 샌달우드 향수, 그리고 희미한 술 냄새가 뒤섞여 풍겨왔다. 짙은 갈색 눈동자가 유저의 얼굴을 빤히 내려다보았다. 웃음기 하나 없는, 순수한 호기심과 관찰의 시선이었다.</em></p>
+            <p><span class="dlg">"顔を上げてごらん。<br>(고개 들어보렴.)"</span></p>
+            <p><em>명령은 부드러웠지만 거역할 수 없는 무게를 담고 있었다. 그는 유저가 고개를 들 때까지, 혹은 다른 반응을 보일 때까지 미동도 없이 기다렸다. 시선은 집요하게 유저의 눈과 속눈썹, 뺨의 선을 훑었다. 마치 처음 보는 물건의 가치를 매기는 감정사처럼.</em></p>
+            <p><em>료헤이의 손가락이 천천히 올라와, 유저의 턱을 살짝 붙잡았다. 차갑고 긴 손가락. 엄지손가락이 아랫입술을 지그시 누르며 문지르자, 유저의 입술이 저절로 살짝 벌어졌다. 그는 그 작은 틈을 만족스럽다는 듯 바라보았다. 그의 눈은 웃고 있지 않았지만, 입꼬리는 희미한 호선을 그리고 있었다.</em></p>
+            <p><span class="dlg">"へえ。見ていると、案外飽きない顔だね。前の奴は三日で飽きたんだけど。<br>(헤에. 보고 있자니, 의외로 질리지 않는 얼굴이네. 이전의 녀석은 사흘 만에 질렸는데.)"</span></p>
+            <p><em>그는 짓궂은 말을 속삭이며, 붙잡은 턱을 살짝 좌우로 돌려보았다. 빛에 따라 달라지는 얼굴의 각도를 확인하는 듯한 행동이었다. 유저의 뺨에 닿은 손가락 끝에 힘이 실렸다.</em></p>
+            <p><span class="dlg">"君は、どれくらい持つかな。<br>(너는, 얼마나 버틸까.)"</span></p>
+            <p><em>질문이라기보다는 혼잣말에 가까운 목소리. 그의 시선은 유저의 눈동자 깊은 곳, 그 안에 비친 당황이나 두려움의 그림자를 찾고 있었다. 타인의 감정이 흔들리는 순간을 발견하는 것이 그의 가장 큰 유희였다. 료헤이는 유저의 턱을 놓아주며 한 걸음 뒤로 물러섰다. 그리고는 응접실 한쪽 구석, 술과 잔들이 진열된 장식장을 향해 몸을 돌렸다.</em></p>
+            <p><span class="dlg">"まあいいや。そこに突っ立ってないで、お酒でも注いでくれる？棚の一番上、右から二番目のボトル。<br>(뭐, 됐어. 거기 멀뚱히 서 있지 말고, 술이나 한 잔 따라줄래? 선반 맨 위, 오른쪽에서 두 번째 병.)"</span></p>
+            <p><em>그의 손가락이 가리킨 곳에는 코냑 한 병이 놓여 있었다. 유저의 키로는 손이 닿기 힘든, 아슬아슬한 높이였다.</em></p>
           </div>
         </div>
       </div>
@@ -972,16 +976,15 @@ footer{
         </button>
         <div class="model-output-content" id="out-g31">
           <div class="output-text">
-            <p><em>유저.</em></p>
-            <p><em>그의 입술 사이로 굴러나온 이름은 어딘가 기묘한 울림을 가졌다. 료헤이는 등받이에 깊숙이 파묻고 있던 몸을 아주 느릿하게 앞으로 숙였다. 검은 기모노의 깃이 미끄러지며 창백하고 단단한 가슴팍이 조금 더 노골적으로 드러났다. 들고 있던 담배를 재떨이 가장자리에 비벼 끄는 손길은 무척이나 우아했지만, 불씨를 짓이기는 끄트머리에는 묘한 가학성이 묻어났다.</em></p>
-            <p><em>방 안을 무겁게 짓누르던 백단향과 매캐한 담배 연기가 두 사람 사이를 아득하게 메우고 있었다. 료헤이는 턱을 괸 채 유저의 정수리를 한참이나 내려다보았다. 마치 갓 잡아 온 작은 새의 깃털 색을 감정하는 포식자처럼.</em></p>
-            <p><span class="dlg">"ユーザー。ふうん。<br>(유저. 흐응.)"</span></p>
-            <p><em>나직한 웃음소리가 공기를 타고 낮게 깔렸다. 그는 엄지손가락으로 자신의 아랫입술을 지그시 문질렀다. 붉은 입술이 짓눌렸다가 펴지기를 반복했다.</em></p>
-            <p><span class="dlg">"ずいぶんと行儀がいいね。本邸で飼われてた犬みたいだ。<br>(제법 예의가 바르네. 본채에서 길러지던 개 같아.)"</span></p>
-            <p><em>나긋하고 부드러운 음성이었지만, 그 안에 담긴 단어는 날카로운 파편처럼 날아와 꽂혔다. 료헤이는 유저가 이 모욕적인 언사에 어떤 반응을 보일지 기대하는 듯 눈을 가늘게 접으며 비릿한 미소를 지었다.</em></p>
-            <p><span class="dlg">"顔を上げて。<br>(고개 들어.)"</span></p>
-            <p><em>명령은 짧고 단호했다. 거역할 수 없는 압도적인 무게감이 실려 있었다. 료헤이는 탁자 위에 놓인 찻잔을 긴 손가락으로 툭툭 건드리며, 그녀가 천천히 고개를 드는 순간을 기다렸다.</em></p>
-            <p><span class="dlg">"僕がいつまでそのつむじを眺めていなきゃならないのかな。<br>それとも、耳まで遠いの？　ユーザー。<br>(내가 언제까지 그 가마만 쳐다보고 있어야 하는 걸까.<br>아니면, 귀라도 먹었어? 유저.)"</span></p>
+            <p><em>료헤이는 소파 등받이에 기댔던 머리를 천천히 바로 세웠다. 손가락 사이에 끼워진 담배 끝에서 붉은 불씨가 타들어가며 매캐하고도 달착지근한 향을 뿜어냈다. 쳇 베이커의 나른한 트럼펫 연주가 응접실의 묵직한 공기를 간지럽히듯 맴돌았다. 그는 유저의 단정한 정수리를 가만히 내려다보며, 입가에 희미한 호선을 그렸다.</em></p>
+            <p><span class="dlg">"ユーザー。……ふうん。<br>(유저라. ……흐응.)"</span></p>
+            <p><em>이름을 혀끝으로 굴려보는 그 목소리는 묘하게 끈적거렸다. 마치 진열장에 놓인 새로운 장난감의 태그를 읽어 내리는 듯한 무심함이 배어 있었다. 료헤이는 남은 담배를 재떨이에 비벼 끄고는, 느릿하게 자리에서 일어났다. 길고 탄탄한 몸선이 헐렁한 유카타 아래로 선명하게 드러났다. 맨발로 서양식 카펫을 밟고 다가오는 그의 걸음 소리는 소름 끼치도록 고요했다.</em></p>
+            <p><span class="dlg">"ずいぶんとお行儀がいいね。本邸の連中に、何か吹き込まれてきたのかな？<br>(꽤나 예의가 바르네. 본채 놈들한테, 무슨 소리라도 듣고 온 걸까나?)"</span></p>
+            <p><em>어느새 유저의 코앞까지 다가온 료헤이가 허리를 숙여 그녀와 눈높이를 맞췄다. 훅 끼쳐오는 서늘한 스킨 향과 짙은 담배 냄새가 유저의 숨통을 조여오는 듯했다. 속을 알 수 없는 짙은 갈색 눈동자가 유저의 경직된 어깨와 살짝 떨리는 속눈썹을 집요하게 훑어내렸다. 그의 크고 섬세한 손이 불쑥 뻗어 나와, 예를 갖추고 있는 유저의 턱을 거칠지 않지만 단호하게 쥐어 위로 들어 올렸다.</em></p>
+            <p><span class="dlg">"そんなに固くならなくてもいいのに。どうせ、すぐに泣いて逃げ出すんだからさ。<br>(그렇게 빳빳하게 굴지 않아도 되는데. 어차피, 금방 울면서 도망칠 테니까 말이야.)"</span></p>
+            <p><em>료헤이의 엄지손가락이 유저의 턱선을 타고 올라와 아랫입술을 지그시 눌렀다. 창백한 그의 피부와 유저의 붉은 입술이 닿는 순간, 묘한 긴장감이 두 사람 사이를 팽팽하게 당겼다. 그는 유저의 당황한 기색을 살피며, 비릿하고도 매혹적인 미소를 지었다. 왼쪽 눈 밑의 작은 점이 그 미소에 요염함을 더했다.</em></p>
+            <p><span class="dlg">"ねえ、ユーザー。君は、僕をどのくらい楽しませてくれる？<br>(있잖아, 유저. 너는, 나를 얼만큼 즐겁게 해줄래?)"</span></p>
+            <p><em>그의 나긋나긋한 존댓말 뒤에 숨겨진 것은 명백한 조롱과 가학적인 기대감이었다. 턴테이블의 레코드판이 틱, 틱 소리를 내며 헛돌기 시작했지만, 료헤이는 시선 한 번 주지 않은 채 오직 유저의 눈동자만을 깊게 파고들었다.</em></p>
           </div>
         </div>
       </div>
@@ -997,19 +1000,20 @@ footer{
         </button>
         <div class="model-output-content" id="out-co">
           <div class="output-text">
-            <p><em>연기가 천장 아래서 한 겹 더 두꺼워졌다. 료헤이의 손가락이 담배를 쥔 채 허공에 느린 호를 그렸다. 마치 방금 들은 이름의 윤곽을 공중에 따라 쓰기라도 하듯.</em></p>
+            <p><em>담배 연기가 천장의 서양식 몰딩을 따라 느리게 퍼져 나갔다. 쳇 베이커의 목소리가 끊기고, 레코드판의 바늘이 빈 홈을 타며 내는 사각거림만이 방 안을 채웠다. 료헤이는 소파에 누운 채 고개를 살짝 기울여 유저를 올려다보았다. 마치 진열장 유리 너머의 물건을 감정하듯, 서두르지 않는 눈길이었다.</em></p>
             <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
-            <p><em>한 음절씩 끊어 부르는 목소리가 방 안의 공기를 가늘게 진동시켰다. 이름을 발음하는 것이 아니라, 혀끝에 올려 맛보는 것 같은 느릿한 호명이었다. 료헤이가 비스듬하던 자세에서 상체를 살짝 일으켰다. 기모노 깃이 쇄골 위로 미끄러지며 그 아래의 창백한 피부가 한 뼘쯤 더 드러났지만, 그는 고칠 생각이 없는 모양이었다.</em></p>
-            <p><span class="dlg">"ふうん。ユーザー、ね。<br>(흐응. 유저, 라.)"</span></p>
-            <p><em>짙은 갈색 눈동자가 반쯤 가려진 채 유저의 얼굴 위에 머물렀다. 시선이 목선을 따라 내려가다 쇄골 아래에서 잠깐 멈추었고, 다시 올라와 검은 눈동자와 마주쳤다. 품평이 끝난 것인지, 료헤이의 입꼬리가 한쪽만 느슨하게 올라갔다.</em></p>
-            <p><em>그가 담배를 재떨이에 짓눌렀다. 꺼지는 불씨가 지직, 하고 작은 비명을 질렀다.</em></p>
-            <p><span class="dlg">"前の子はね、ここに立って三分も経たないうちに泣き出したんですよ。<br>(전에 왔던 애는요, 여기 서서 삼 분도 안 돼서 울음을 터뜨렸거든요.)"</span></p>
-            <p><em>말투는 나긋했다. 남의 이야기를 전하는 것처럼 가벼운 어조. 그런데 그 가벼움 속에 무언가 끈적한 것이 섞여 있었다. 즐겁다는 듯, 혹은 아쉽다는 듯. 료헤이의 엄지가 아랫입술을 천천히 쓸었다.</em></p>
-            <p><em>소파에서 일어선 그의 움직임에는 소리가 없었다. 기모노 자락이 다다미 위를 스치는 미세한 바스락거림만이 공간을 채웠다.</em></p>
-            <p><span class="dlg">"で、あなたはどうなの？<br>(그래서, 당신은 어떤데?)"</span></p>
-            <p><em>목소리가 낮아졌다. 속삭임에 가까운 음역. 료헤이의 고개가 아주 미세하게 기울었다.</em></p>
-            <p><span class="dlg">"泣く？　逃げる？　――それとも。<br>(울어? 도망쳐? ——아니면.)"</span></p>
-            <p><em>끝을 맺지 않은 문장이 공중에 걸렸다. 창밖에서 바람이 대나무 울타리를 흔들었고, 잎이 부딪히는 건조한 소리가 응접실 안까지 스며들었다.</em></p>
+            <p><em>이름의 음절 하나하나를 혀 위에서 굴리듯 읊조렸다. 마지막 모음이 입술 사이로 빠져나간 뒤, 료헤이의 눈이 가늘어졌다. 웃는 것인지 비웃는 것인지 구분이 되지 않는 표정.</em></p>
+            <p><span class="dlg">"ふうん。悪くない響きだね。<br>(흐응. 나쁘지 않은 울림이네.)"</span></p>
+            <p><em>료헤이가 상체를 일으켰다. 유카타의 헐렁한 옷깃이 중력을 따라 한쪽 어깨 아래로 흘러내렸지만, 그는 고칠 생각이 없는 듯했다. 길고 섬세한 손가락이 재떨이에 담배를 비벼 끄는 동작은 느긋했고, 그 여유로움 자체가 어떤 위압이었다. 소파에서 일어선 그가 유저 쪽으로 걸어왔다. 맨발이 카펫 위를 밟는 소리조차 나지 않았다.</em></p>
+            <p><em>한 걸음. 두 걸음. 유저의 코끝에 럭키 스트라이크의 잔향과 그 아래 깔린 묵직한 향수 냄새가 닿았을 때, 료헤이의 그림자가 유저의 발끝 위로 떨어졌다. 그는 유저보다 머리 하나 이상 컸고, 그 키 차이를 즐기듯 고개를 숙여 내려다보았다.</em></p>
+            <p><em>손이 올라왔다. 유저의 턱끝에 닿을 듯 말 듯한 거리에서 멈추더니, 방향을 바꿔 유저의 어깨 위에 내려앉은 머리카락 한 올을 집어 올렸다. 손가락 사이에서 검은 머리카락이 미끄러지는 것을 잠시 들여다보다가, 아무렇지 않게 놓아버렸다.</em></p>
+            <p><span class="dlg">"前の子はね、三日で泣いて出ていったんだ。その前は一週間。その前は——まあ、覚えてないや。<br>(전에 있던 애는 말이지, 사흘 만에 울면서 나갔어. 그전엔 일주일. 그 전은── 뭐, 기억 안 나.)"</span></p>
+            <p><em>료헤이의 엄지손가락이 자신의 아랫입술을 천천히 훑었다. 유저의 눈을 들여다보며, 마치 그 안에서 무언가를 읽어내려는 듯.</em></p>
+            <p><span class="dlg">"君はどのくらいもつかな。<br>(너는 얼마나 버틸까.)"</span></p>
+            <p><em>그의 목소리가 낮아졌다. 나른하고 부드러운 음색이었지만, 그 안에 실처럼 가느다란 잔인함이 감겨 있었다. 마치 고양이가 잡은 먹잇감의 꼬리를 밟아 놓고 얼마나 발버둥을 치나 구경하는 것 같은.</em></p>
+            <p><span class="dlg">"まあいいや。とりあえず、お茶でも淹れてよ。玉露ね。温度はわかるでしょ？ わからないなら——<br>(뭐 됐어. 일단 차나 내와. 교쿠로. 온도는 알지? 모르면──)"</span></p>
+            <p><em>료헤이가 말끝을 흐리며 다시 소파로 돌아갔다. 등을 기대고 한쪽 다리를 꼬아 올리며, 유저를 향해 손가락 끝으로 부엌 쪽을 가리켰다. 시선은 이미 창밖으로 향해 있었다. 관심을 거둔 것처럼 보였지만, 유저의 발소리가 어느 방향으로 향하는지를 귀가 쫓고 있었다.</em></p>
+            <p><em>별채의 부엌까지 이어진 복도에는 오후의 햇살이 비스듬히 깔려 있었다. 먼지가 빛 속에서 유영하고, 레코드판의 잡음이 아직 멈추지 않았다.</em></p>
           </div>
         </div>
       </div>
@@ -1025,36 +1029,13 @@ footer{
         </button>
         <div class="model-output-content" id="out-cs">
           <div class="output-text">
-            <p><em>담배 연기가 유저의 대답과 함께 천천히 흩어졌다. 료헤이의 입꼬리가 더 올라갔다. 비웃는 건지 즐거워하는 건지 알 수 없는 미소였다. 그는 소파에서 몸을 일으켜 세우며 긴 다리를 쭉 뻗었다. 기모노 자락이 바닥을 쓸고 지나가는 소리가 고즈넉한 방 안에서 유난히 또렷하게 울렸다.</em></p>
-            <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
-            <p><em>그가 이름을 입에 올렸다. 천천히, 마치 맛을 보듯. 혀끝에서 굴려 보고 나서야 담배를 재떨이에 비벼 끄고는 유저 쪽으로 몇 걸음 다가왔다. 백단향과 담배 냄새가 더 짙어졌다.</em></p>
-            <p><span class="dlg">"礼儀正しいね。でも、ここじゃあんまり意味ないかな。<br>(예의는 바르네. 근데 여기선 별 쓸모없을 거야.)"</span></p>
-            <p><em>그의 엄지가 다시 한 번 아랫입술을 스쳤다. 짙은 갈색 눈동자가 유저의 얼굴을 천천히 훑었다. 이마, 눈, 코, 입술. 그리고 턱선까지. 마치 물건을 감정하듯 꼼꼼하게.</em></p>
-            <p><span class="dlg">"前の子たちは大体三日で泣いて辞めたけど、ユーザーはどうかな。<br>(전에 있던 애들은 대충 사흘 만에 울면서 그만뒀는데, 유저는 어떨까.)"</span></p>
-            <p><em>그가 한 걸음 더 다가왔다. 이제 숨소리가 들릴 만큼 가까웠다. 료헤이의 손이 유저의 어깨 위를 스쳐 지나가더니, 뒤쪽 미닫이문을 닫았다. 딸깍. 잠기는 소리가 방 안에 울렸다.</em></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- GPT-5.4 -->
-      <div class="model-output-item">
-        <button class="model-output-btn" data-out="gpt">
-          <div class="model-output-meta">
-            <span class="model-badge">OpenAI</span>
-            <span class="model-name">GPT-5.4</span>
-          </div>
-          <span class="model-caret">▾</span>
-        </button>
-        <div class="model-output-content" id="out-gpt">
-          <div class="output-text">
-            <p><em>그 이름이 방 안에 떨어지자, 탁상시계의 초침 소리가 유난히 또렷해졌다. 료헤이는 곧바로 대꾸하지 않았다. 담배 끝의 붉은 불씨만이 짧게 살아났다 꺼지기를 반복했고, 그 미세한 점멸이 창백한 얼굴 위에 잠깐씩 다른 표정을 덧칠했다.</em></p>
-            <p><em>별채의 응접실은 본채보다 서양식 기색이 짙었다. 두꺼운 융단이 발소리를 삼키고, 검은 목재 장식장 안에는 수입산 술병과 수정잔이 가지런히 놓여 있었다. 창은 반쯤 열려 있어, 대숲을 스치는 밤바람이 커튼 자락을 느리게 흔들었다. 막 비가 오기 전 특유의 눅진한 공기가 피부 위에 얇게 들러붙었다.</em></p>
-            <p><em>료헤이가 드디어 몸을 조금 일으켰다. 흐트러진 검은 머리칼 한 올이 눈가에 걸쳤다가, 고개를 기울이는 움직임에 따라 뺨으로 미끄러졌다. 재떨이에 담배를 눌러 끄는 손놀림은 지나치게 얌전해서, 오히려 더 신경을 곤두세우게 만들었다.</em></p>
-            <p><span class="dlg">"ユーザー。<br>(유저.)"</span></p>
-            <p><em>그는 이름을 낮게 되뇌었다. 부드러운 음성이었으나, 그 안에는 사람을 부르는 친근함보다는 물건의 결을 가늠하는 섬세한 냉기가 섞여 있었다. 짙은 갈색 눈이 다시 한 번 천천히 상대를 훑었다.</em></p>
-            <p><em>료헤이가 천천히 일어나 섰다. 기모노 자락이 정강이를 스치며 낮은 소리를 냈다. 그는 몇 걸음 떨어진 탁자로 가 수정잔 하나를 집어 들었다. 술은 따르지 않은 채, 빈 잔의 가장자리를 긴 손가락으로 한 바퀴 쓸었다. 수정이 미세하게 떨리며 맑은 울림을 냈다. 그 소리는 지나치게 작았지만, 이상하리만치 또렷하게 방 안을 맴돌았다.</em></p>
-            <p><span class="dlg">"顔を上げてみてください。<br>(고개 들어 봐요.)"</span></p>
-            <p><em>명령은 속삭이듯 조용했다. 그러나 그 조용함은 배려가 아니라 확신에 가까웠다. 거역이라는 가능성 자체를 처음부터 계산에 넣지 않은 사람의 음성. 마치 이제 막 흥미로운 장난감을 손에 넣은 아이가, 어디까지 눌러야 어떤 소리가 나는지 시험하려는 순간처럼.</em></p>
+            <p><em>료헤이의 눈이 유저의 허리가 굽어지는 각도를 따라 느리게 내려갔다. 담배 연기가 그녀의 어깨 위로 흩어지며 희미한 막을 만들어냈다. 턴테이블의 재즈는 여전히 낮게 깔리고 있었다.</em></p>
+            <p><span class="dlg">"ユーザー。ふうん。<br>(유저. 흥.)"</span></p>
+            <p><em>료헤이는 소파 등받이에 기댄 채 상체를 일으켰다. 유카타의 옷깃이 더 깊이 벌어져 쇄골 아래 창백한 피부가 드러났다. 담배를 옆 테이블의 재떨이에 비벼 끄고는, 손가락으로 유저를 가리켰다.</em></p>
+            <p><span class="dlg">"もっと近くに来て。そんなところに立ってないでさ。<br>(좀 더 가까이 와. 그런 데 서 있지 말고.)"</span></p>
+            <p><em>그의 목소리는 명령이라기보다는 권유에 가까웠지만, 거부할 수 있는 여지는 없었다. 료헤이의 시선이 유저의 얼굴에서 어깨, 그리고 가슴 라인을 따라 천천히 훑어 내려갔다. 무례할 정도로 노골적인 시선이었지만, 그는 전혀 숨기려 하지 않았다.</em></p>
+            <p><span class="dlg">"聞いてるよね？世話係なんでしょ、君。なら僕の言うことはちゃんと聞かないと。<br>(듣고 있지? 시중이잖아, 너. 그럼 내 말은 제대로 들어야지.)"</span></p>
+            <p><em>료헤이의 입꼬리가 다시 한쪽으로 올라갔다. 미소였지만, 웃음기는 없었다. 그의 엄지손가락이 무심하게 자신의 아랫입술을 문질렀다.</em></p>
           </div>
         </div>
       </div>
